@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Service</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    input, button { padding: 10px; margin: 10px; }
+    .weather { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <h1>Weather Service</h1>
+  <input type="text" id="city" placeholder="Enter city name">
+  <button onclick="getWeather()">Get Weather</button>
+
+  <div class="weather" id="weatherResult"></div>
+
+  <script>
+    function getWeather() {
+      const city = document.getElementById('city').value;
+      fetch(`http://localhost:4000/weather?city=${city}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            document.getElementById('weatherResult').innerHTML = data.error;
+          } else {
+            document.getElementById('weatherResult').innerHTML = `
+              <h2>${data.location}</h2>
+              <p>Temperature: ${data.temperature}</p>
+              <p>Humidity: ${data.humidity}</p>
+              <p>Condition: ${data.condition}</p>
+              <img src="${data.icon}" alt="icon">
+            `;
+          }
+        });
+    }
+  </script>
+
+</body>
+</html>
