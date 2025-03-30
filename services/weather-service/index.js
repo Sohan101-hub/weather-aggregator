@@ -6,7 +6,7 @@ const cors = require('cors');
 const app = express();
 const PORT = 4000;
 
-const API_KEY = 'b534e00a58804856803121742252303';
+const API_KEY = "enter_api_key_here";
 
 app.use(cors());
 
